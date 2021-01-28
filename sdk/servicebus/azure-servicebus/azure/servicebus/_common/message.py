@@ -70,6 +70,7 @@ class ServiceBusMessage(
     :keyword Optional[str] content_type: The content type descriptor.
     :keyword Optional[str] correlation_id: The correlation identifier.
     :keyword Optional[str] subject: The application specific subject, sometimes referred to as label.
+    :keyword Optional[str] label: alias for subject keyword
     :keyword Optional[str] partition_key: The partition key for sending a message to a partitioned entity.
     :keyword Optional[str] to: The `to` address used for auto_forward chaining scenarios.
     :keyword Optional[str] reply_to: The address of an entity to send replies to.
@@ -112,7 +113,7 @@ class ServiceBusMessage(
             self.to = kwargs.pop("to", None)
             self.reply_to = kwargs.pop("reply_to", None)
             self.reply_to_session_id = kwargs.pop("reply_to_session_id", None)
-            self.subject = kwargs.pop("subject", None)
+            self.subject = kwargs.pop("subject", None) or kwargs.pop("label", None)
             self.scheduled_enqueue_time_utc = kwargs.pop(
                 "scheduled_enqueue_time_utc", None
             )
